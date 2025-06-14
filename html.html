@@ -33,6 +33,42 @@
         overflow-x: hidden;
       }
 
+      /* Language Switcher */
+      .language-switcher {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1001;
+        display: flex;
+        gap: 10px;
+      }
+
+      .lang-btn {
+        background: rgba(255, 255, 255, 0.2);
+        border: 1px solid var(--white);
+        color: var(--white);
+        padding: 5px 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.3s;
+        backdrop-filter: blur(5px);
+      }
+
+      .lang-btn:hover {
+        background: var(--white);
+        color: var(--dark-blue);
+      }
+
+      .lang-btn.active {
+        background: var(--white);
+        color: var(--dark-blue);
+        font-weight: bold;
+      }
+
+      .rtl {
+        direction: rtl;
+      }
+
       /* Text Highlight Animation */
       .highlight-text {
         position: relative;
@@ -73,7 +109,7 @@
           var(--primary-blue)
         );
         color: var(--white);
-        padding: 1rem 0;
+        /* padding: 1rem 0; */
         position: fixed;
         width: 100%;
         z-index: 1000;
@@ -86,21 +122,21 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        max-width: 1200px;
+        max-width: 1400px;
         margin: 0 auto;
         padding: 0 2rem;
       }
 
       .logo {
-        font-size: 1.5rem;
+        /* font-size: 1.5rem; */
         font-weight: bold;
         display: flex;
         align-items: center;
       }
 
       .logo img {
-        height: 50px;
-        margin-right: 10px;
+        height: 70px;
+        /* margin-right: 10px; */
         transition: transform 0.3s;
       }
 
@@ -158,8 +194,7 @@
       /* Hero Section */
       .hero {
         height: 100vh;
-        background: 
-          url("https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80");
+        background: url("https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80");
         background-size: cover;
         background-position: center;
         display: flex;
@@ -997,7 +1032,7 @@
       }
 
       .footer-logo img {
-        height: 40px;
+        height: 80px;
         margin-right: 10px;
       }
 
@@ -1089,6 +1124,32 @@
       .cursor.hover {
         transform: translate(-50%, -50%) scale(2);
         background-color: var(--highlight-color);
+      }
+
+      /* Success Message */
+      .success-message {
+        display: none;
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background-color: #4caf50;
+        color: white;
+        padding: 15px 25px;
+        border-radius: 5px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        z-index: 10000;
+        animation: slideIn 0.5s forwards;
+      }
+
+      @keyframes slideIn {
+        from {
+          transform: translateX(100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
       }
 
       /* Animations */
@@ -1284,9 +1345,30 @@
         color: #ccc;
         transition: opacity 0.5s ease;
       }
+
+      .qr-code{
+        /* height: 80%; */
+        /* margin-top: 10px; */
+        display: flex;
+        height: 300px;
+        /* background: red; */
+        justify-content: center;
+        align-items: center;
+      }
+      .qr-code img{
+        height: 200px;
+      }
     </style>
   </head>
   <body>
+    <!-- Language Switcher -->
+   
+
+    <!-- Success Message -->
+    <div id="successMessage" class="success-message">
+      Your message has been sent successfully!
+    </div>
+
     <!-- Custom Cursor -->
     <div class="cursor" id="cursor"></div>
 
@@ -1294,20 +1376,49 @@
     <header>
       <div class="header-container">
         <div class="logo">
-          <img src="https://via.placeholder.com/50x50?text=NS" alt="Logo" />
-          <span>Nujoud General Contracting </span>
+          <img src="./logo.png" alt="Logo" />
+          <span class="translate" data-key="company_name"
+            >Nujoud General Contracting</span
+          >
         </div>
         <button class="mobile-menu-btn" id="mobileMenuBtn">
           <i class="fas fa-bars"></i>
         </button>
+
         <nav>
           <ul id="navMenu">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About Us</a></li>
-            <li><a href="#vision-mission">Vision & Mission</a></li>
-            <li><a href="#services">Our Services</a></li>
-            <li><a href="#gallery">Gallery</a></li>
-            <li><a href="#contact">Contact Us</a></li>
+            <li><a href="#home" class="translate" data-key="home">Home</a></li>
+            <li>
+              <a href="#about" class="translate" data-key="about">About Us</a>
+            </li>
+            <li>
+              <a
+                href="#vision-mission"
+                class="translate"
+                data-key="vision_mission"
+                >Vision & Mission</a
+              >
+            </li>
+            <li>
+              <a href="#services" class="translate" data-key="services"
+                >Our Services</a
+              >
+            </li>
+            <li>
+              <a href="#gallery" class="translate" data-key="gallery"
+                >Gallery</a
+              >
+            </li>
+            <li>
+              <a href="#contact" class="translate" data-key="contact"
+                >Contact Us</a
+              >
+            </li>
+
+             <li class="">
+      <button class="lang-btn active" id="enBtn">EN</button>
+      <button class="lang-btn" id="arBtn">AR</button>
+    </li>
           </ul>
         </nav>
       </div>
@@ -1316,39 +1427,41 @@
     <!-- Hero Section -->
     <section class="hero" id="home">
       <div class="hero-content">
-        <!-- Crafting Spaces That Shape Your World. -->
-        <!-- <h1><span class="highlight-text">Crafting Spaces  That Shape Your World</span> 
-               
-             </h1> -->
-
         <div class="hero-content text-center">
           <h1 id="heroTitle" class="main-text highlight-text"></h1>
           <p id="heroTagline" class="text-lg mt-4 text-gray-200"></p>
         </div>
 
-        <!-- <h1 class="main-text">
-          <span class="highlight-text">Crafting Spaces</span>
-          <span class="highlight-text">That Shape Your World</span>
-        </h1> -->
-
-        <!-- <p><span class="highlight-text">C.R. 2050157753</span></p> -->
         <div>
-          <a href="#contact" class="btn">Get in Touch</a>
-          <a href="#services" class="btn btn-outline">Our Services</a>
+          <a href="#contact" class="btn translate" data-key="get_in_touch"
+            >Get in Touch</a
+          >
+          <a
+            href="#services"
+            class="btn btn-outline translate"
+            data-key="our_services"
+            >Our Services</a
+          >
         </div>
 
         <div class="hero-stats">
           <div class="stat-item">
             <div class="stat-number" id="projectsCount">0</div>
-            <div class="stat-label">Completed Projects</div>
+            <div class="stat-label translate" data-key="completed_projects">
+              Completed Projects
+            </div>
           </div>
           <div class="stat-item">
             <div class="stat-number" id="clientsCount">0</div>
-            <div class="stat-label">Satisfied Clients</div>
+            <div class="stat-label translate" data-key="satisfied_clients">
+              Satisfied Clients
+            </div>
           </div>
           <div class="stat-item">
             <div class="stat-number" id="yearsCount">0</div>
-            <div class="stat-label">Years of Experience</div>
+            <div class="stat-label translate" data-key="years_experience">
+              Years of Experience
+            </div>
           </div>
         </div>
       </div>
@@ -1356,41 +1469,67 @@
 
     <!-- Table of Contents -->
     <section class="toc">
-      <h2>TABLE OF CONTENTS</h2>
+      <h2 class="translate" data-key="table_of_contents">TABLE OF CONTENTS</h2>
       <div class="toc-items">
         <div class="toc-item">
           <div class="toc-number">01</div>
-          <h3 class="toc-title">About Us</h3>
-          <p class="toc-description">
+          <h3 class="toc-title translate" data-key="about_us">About Us</h3>
+          <p class="toc-description translate" data-key="about_description">
             Learn about our company, expertise, and what makes us different.
           </p>
-          <a href="#about" class="btn" style="margin-top: 1rem">Read More</a>
+          <a
+            href="#about"
+            class="btn"
+            style="margin-top: 1rem"
+            data-key="read_more"
+            >Read More</a
+          >
         </div>
         <div class="toc-item">
           <div class="toc-number">02</div>
-          <h3 class="toc-title">Vision & Mission</h3>
-          <p class="toc-description">
+          <h3 class="toc-title translate" data-key="vision_mission">
+            Vision & Mission
+          </h3>
+          <p class="toc-description translate" data-key="vision_description">
             Discover our guiding principles and long-term objectives.
           </p>
-          <a href="#vision-mission" class="btn" style="margin-top: 1rem"
+          <a
+            href="#vision-mission"
+            class="btn"
+            style="margin-top: 1rem"
+            data-key="read_more"
             >Read More</a
           >
         </div>
         <div class="toc-item">
           <div class="toc-number">03</div>
-          <h3 class="toc-title">Our Services</h3>
-          <p class="toc-description">
+          <h3 class="toc-title translate" data-key="our_services">
+            Our Services
+          </h3>
+          <p class="toc-description translate" data-key="services_description">
             Explore the comprehensive services we offer to our clients.
           </p>
-          <a href="#services" class="btn" style="margin-top: 1rem">Read More</a>
+          <a
+            href="#services"
+            class="btn"
+            style="margin-top: 1rem"
+            data-key="read_more"
+            >Read More</a
+          >
         </div>
         <div class="toc-item">
           <div class="toc-number">04</div>
-          <h3 class="toc-title">Contact Us</h3>
-          <p class="toc-description">
+          <h3 class="toc-title translate" data-key="contact_us">Contact Us</h3>
+          <p class="toc-description translate" data-key="contact_description">
             Get in touch with our team for your construction needs.
           </p>
-          <a href="#contact" class="btn" style="margin-top: 1rem">Read More</a>
+          <a
+            href="#contact"
+            class="btn"
+            style="margin-top: 1rem"
+            data-key="read_more"
+            >Read More</a
+          >
         </div>
       </div>
     </section>
@@ -1405,48 +1544,49 @@
           />
         </div>
         <div class="section-content">
-          <h2 class="section-title">ABOUT US!</h2>
-          <p class="section-text">
-            We specialize in delivering
-            <span class="highlight-text"
-              >exceptional construction solutions</span
-            >
-            across Saudi Arabia. With a focus on
-            <span class="highlight-text">quality</span>,
-            <span class="highlight-text">innovation</span>, and
-            <span class="highlight-text">client satisfaction</span>, we bring
-            expertise and dedication to every project we undertake.
+          <h2 class="section-title translate" data-key="about_us">ABOUT US!</h2>
+          <p class="section-text translate" data-key="about_text">
+            We specialize in delivering exceptional construction solutions
+            across Saudi Arabia. With a focus on quality, innovation, and client
+            satisfaction, we bring expertise and dedication to every project we
+            undertake.
           </p>
 
           <div class="expertise-list">
             <div class="expertise-item">
               <h3 class="expertise-title">
-                <i class="fas fa-award"></i> Construction Excellence
+                <i class="fas fa-award"></i>
+                <span class="translate" data-key="construction_excellence"
+                  >Construction Excellence</span
+                >
               </h3>
-              <p>
-                From residential to commercial projects, we ensure
-                <span class="highlight-text">superior craftsmanship</span> and
-                attention to detail.
+              <p class="translate" data-key="construction_description">
+                From residential to commercial projects, we ensure superior
+                craftsmanship and attention to detail.
               </p>
             </div>
             <div class="expertise-item">
               <h3 class="expertise-title">
-                <i class="fas fa-users"></i> Client-Centered Approach
+                <i class="fas fa-users"></i>
+                <span class="translate" data-key="client_approach"
+                  >Client-Centered Approach</span
+                >
               </h3>
-              <p>
+              <p class="translate" data-key="client_description">
                 We prioritize understanding our clients' needs to deliver
-                <span class="highlight-text">tailored solutions</span> that
-                exceed expectations.
+                tailored solutions that exceed expectations.
               </p>
             </div>
             <div class="expertise-item">
               <h3 class="expertise-title">
-                <i class="fas fa-medal"></i> Commitment to Quality
+                <i class="fas fa-medal"></i>
+                <span class="translate" data-key="quality_commitment"
+                  >Commitment to Quality</span
+                >
               </h3>
-              <p>
-                With a team of
-                <span class="highlight-text">experienced professionals</span>,
-                we uphold the highest standards of construction excellence.
+              <p class="translate" data-key="quality_description">
+                With a team of experienced professionals, we uphold the highest
+                standards of construction excellence.
               </p>
             </div>
           </div>
@@ -1458,77 +1598,102 @@
     <section class="vision-mission" id="vision-mission">
       <div class="vm-container">
         <div class="vm-card">
-          <h3 class="vm-title">Vision</h3>
-          <p class="vm-text">
-            To be the <span class="highlight-text">leading provider</span> of
-            innovative and sustainable construction solutions in Saudi Arabia,
-            recognized for our commitment to
-            <span class="highlight-text">excellence</span>,
-            <span class="highlight-text">integrity</span>, and
-            <span class="highlight-text">client satisfaction</span>.
+          <h3 class="vm-title translate" data-key="vision">Vision</h3>
+          <p class="vm-text translate" data-key="vision_text">
+            To be the leading provider of innovative and sustainable
+            construction solutions in Saudi Arabia, recognized for our
+            commitment to excellence, integrity, and client satisfaction.
           </p>
         </div>
         <div class="vm-card">
-          <h3 class="vm-title">Mission</h3>
-          <p class="vm-text">
-            Our mission is to deliver
-            <span class="highlight-text"
-              >high-quality construction projects</span
-            >
-            tailored to meet the unique needs of our clients. Through
-            <span class="highlight-text">expert craftsmanship</span>,
-            <span class="highlight-text">advanced technologies</span>, and a
-            <span class="highlight-text">dedicated team</span>, we aim to exceed
-            expectations, foster long-term relationships, and contribute
-            positively to the growth and development of communities across Saudi
-            Arabia.
+          <h3 class="vm-title translate" data-key="mission">Mission</h3>
+          <p class="vm-text translate" data-key="mission_text">
+            Our mission is to deliver high-quality construction projects
+            tailored to meet the unique needs of our clients. Through expert
+            craftsmanship, advanced technologies, and a dedicated team, we aim
+            to exceed expectations, foster long-term relationships, and
+            contribute positively to the growth and development of communities
+            across Saudi Arabia.
           </p>
         </div>
       </div>
     </section>
 
     <!-- Services Section -->
+    <!-- Services Section -->
     <section class="services" id="services">
-      <h2>OUR SERVICES</h2>
+      <h2 class="translate" data-key="our_services">OUR SERVICES</h2>
       <div class="services-grid">
         <div class="service-card">
           <div class="service-icon">
-            <i class="fas fa-tile"></i>
+            <i class="fas fa-tree"></i>
           </div>
           <div class="service-content">
-            <h3 class="service-title">Tiles Work</h3>
-            <p class="service-description">
-              Professional installation of tiles for floors, walls, and
-              specialized areas using
-              <span class="highlight-text">high-quality materials</span> and
-              <span class="highlight-text">skilled craftsmanship</span>.
+            <h3 class="service-title translate" data-key="landscape_services">
+              Landscape Services
+            </h3>
+            <p
+              class="service-description translate"
+              data-key="landscape_description"
+            >
+              We provide complete landscaping solutions, including asphalt
+              paving, interlock installation, retaining walls, and grading —
+              turning your outdoor space into a functional and polished area.
             </p>
           </div>
         </div>
         <div class="service-card">
           <div class="service-icon">
-            <i class="fas fa-paint-roller"></i>
+            <i class="fas fa-paint-brush"></i>
           </div>
           <div class="service-content">
-            <h3 class="service-title">Painting</h3>
-            <p class="service-description">
-              Interior and exterior painting services that enhance aesthetics
-              and protect surfaces, utilizing
-              <span class="highlight-text">premium paints</span> and finishes.
+            <h3 class="service-title translate" data-key="finishing_works">
+              Finishing Works
+            </h3>
+            <p
+              class="service-description translate"
+              data-key="finishing_description"
+            >
+              We provide high-quality finishing services, including tiling,
+              ceiling installation, painting, and trim — adding the final
+              details that bring your space to life with a polished, complete
+              look.
             </p>
           </div>
         </div>
         <div class="service-card">
           <div class="service-icon">
-            <i class="fas fa-home"></i>
+            <i class="fas fa-tools"></i>
           </div>
           <div class="service-content">
-            <h3 class="service-title">Plastering</h3>
-            <p class="service-description">
-              Expert plastering solutions for
-              <span class="highlight-text">smooth</span> and
-              <span class="highlight-text">durable wall surfaces</span>,
-              ensuring flawless finishes.
+            <h3 class="service-title translate" data-key="maintenance_work">
+              Maintenance Work
+            </h3>
+            <p
+              class="service-description translate"
+              data-key="maintenance_description"
+            >
+              Dependable maintenance and repair services keep your property
+              functioning and safe. Our comprehensive solutions ensure your
+              space remains in top condition year-round.
+            </p>
+          </div>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">
+            <i class="fas fa-drafting-compass"></i>
+          </div>
+          <div class="service-content">
+            <h3 class="service-title translate" data-key="design_work">
+              Design Work
+            </h3>
+            <p
+              class="service-description translate"
+              data-key="design_description"
+            >
+              We provide expert MEP, architectural, and interior design work —
+              creative solutions tailored to your vision and requirements for a
+              perfectly designed space.
             </p>
           </div>
         </div>
@@ -1537,13 +1702,15 @@
             <i class="fas fa-faucet"></i>
           </div>
           <div class="service-content">
-            <h3 class="service-title">Plumbing</h3>
-            <p class="service-description">
-              Complete plumbing services encompassing
-              <span class="highlight-text">installation</span>,
-              <span class="highlight-text">repair</span>, and
-              <span class="highlight-text">maintenance</span> of water supply,
-              drainage, and fixtures.
+            <h3 class="service-title translate" data-key="plumbing">
+              Plumbing
+            </h3>
+            <p
+              class="service-description translate"
+              data-key="plumbing_description"
+            >
+              Complete plumbing services encompassing installation, repair, and
+              maintenance of water supply, drainage, and fixtures.
             </p>
           </div>
         </div>
@@ -1552,11 +1719,13 @@
             <i class="fas fa-wind"></i>
           </div>
           <div class="service-content">
-            <h3 class="service-title">HVAC</h3>
-            <p class="service-description">
+            <h3 class="service-title translate" data-key="hvac">HVAC</h3>
+            <p
+              class="service-description translate"
+              data-key="hvac_description"
+            >
               Design, installation, and servicing of HVAC systems to optimize
-              <span class="highlight-text">indoor air quality</span> and
-              <span class="highlight-text">comfort</span>.
+              indoor air quality and comfort.
             </p>
           </div>
         </div>
@@ -1565,12 +1734,16 @@
             <i class="fas fa-fire-extinguisher"></i>
           </div>
           <div class="service-content">
-            <h3 class="service-title">Fire Fighting</h3>
-            <p class="service-description">
-              Implementation of
-              <span class="highlight-text">fire safety systems</span> including
-              detection, suppression, and emergency response planning to
-              safeguard properties and occupants.
+            <h3 class="service-title translate" data-key="fire_fighting">
+              Fire Fighting
+            </h3>
+            <p
+              class="service-description translate"
+              data-key="fire_description"
+            >
+              Implementation of fire safety systems including detection,
+              suppression, and emergency response planning to safeguard
+              properties and occupants.
             </p>
           </div>
         </div>
@@ -1579,13 +1752,16 @@
             <i class="fas fa-building"></i>
           </div>
           <div class="service-content">
-            <h3 class="service-title">Civil Work</h3>
-            <p class="service-description">
-              Comprehensive civil engineering services covering
-              <span class="highlight-text">excavation</span>,
-              <span class="highlight-text">foundation laying</span>,
-              <span class="highlight-text">structural construction</span>, and
-              <span class="highlight-text">infrastructure development</span>.
+            <h3 class="service-title translate" data-key="civil_work">
+              Civil Work
+            </h3>
+            <p
+              class="service-description translate"
+              data-key="civil_description"
+            >
+              Comprehensive civil engineering services covering excavation,
+              foundation laying, structural construction, and infrastructure
+              development.
             </p>
           </div>
         </div>
@@ -1594,26 +1770,15 @@
             <i class="fas fa-hammer"></i>
           </div>
           <div class="service-content">
-            <h3 class="service-title">Carpentry</h3>
-            <p class="service-description">
-              Custom carpentry services for
-              <span class="highlight-text">furniture</span>,
-              <span class="highlight-text">fixtures</span>, and
-              <span class="highlight-text">interior woodwork</span>, tailored to
-              meet aesthetic and functional requirements.
-            </p>
-          </div>
-        </div>
-        <div class="service-card">
-          <div class="service-icon">
-            <i class="fas fa-couch"></i>
-          </div>
-          <div class="service-content">
-            <h3 class="service-title">Interior Design</h3>
-            <p class="service-description">
-              Creative interior design solutions that
-              <span class="highlight-text">transform spaces</span> with
-              innovative layouts, materials, and decorative elements.
+            <h3 class="service-title translate" data-key="carpentry">
+              Carpentry
+            </h3>
+            <p
+              class="service-description translate"
+              data-key="carpentry_description"
+            >
+              Custom carpentry services for furniture, fixtures, and interior
+              woodwork, tailored to meet aesthetic and functional requirements.
             </p>
           </div>
         </div>
@@ -1622,7 +1787,7 @@
 
     <!-- Gallery Section -->
     <section class="gallery" id="gallery">
-      <h2>GALLERY</h2>
+      <h2 class="translate" data-key="gallery">GALLERY</h2>
       <div class="gallery-grid">
         <div class="gallery-item">
           <img
@@ -1630,7 +1795,9 @@
             alt="Construction Project"
           />
           <div class="gallery-overlay">
-            <h3>Residential Project</h3>
+            <h3 class="translate" data-key="residential_project">
+              Residential Project
+            </h3>
           </div>
         </div>
         <div class="gallery-item">
@@ -1639,7 +1806,9 @@
             alt="Construction Project"
           />
           <div class="gallery-overlay">
-            <h3>Commercial Building</h3>
+            <h3 class="translate" data-key="commercial_building">
+              Commercial Building
+            </h3>
           </div>
         </div>
 
@@ -1656,7 +1825,9 @@
             alt="Construction Project"
           />
           <div class="gallery-overlay">
-            <h3>Interior Design</h3>
+            <h3 class="translate" data-key="interior_design">
+              Interior Design
+            </h3>
           </div>
         </div>
 
@@ -1672,7 +1843,9 @@
             alt="Construction Project"
           />
           <div class="gallery-overlay">
-            <h3>Kitchen Renovation</h3>
+            <h3 class="translate" data-key="kitchen_renovation">
+              Kitchen Renovation
+            </h3>
           </div>
         </div>
         <div class="gallery-item">
@@ -1681,7 +1854,9 @@
             alt="Construction Project"
           />
           <div class="gallery-overlay">
-            <h3>Bathroom Design</h3>
+            <h3 class="translate" data-key="bathroom_design">
+              Bathroom Design
+            </h3>
           </div>
         </div>
 
@@ -1698,7 +1873,7 @@
             alt="Construction Project"
           />
           <div class="gallery-overlay">
-            <h3>Living Space</h3>
+            <h3 class="translate" data-key="living_space">Living Space</h3>
           </div>
         </div>
 
@@ -1727,19 +1902,19 @@
 
     <!-- Contact Section -->
     <section class="contact" id="contact">
-      <h2>CONTACT US</h2>
+      <h2 class="translate" data-key="contact_us">CONTACT US</h2>
       <div class="contact-container">
         <div class="contact-info">
-          <h3>Get in Touch</h3>
+          <h3 class="translate" data-key="get_in_touch">Get in Touch</h3>
           <div class="contact-details">
             <div class="contact-item">
               <div class="contact-icon">
                 <i class="fas fa-phone"></i>
               </div>
               <div class="contact-text">
-                <strong>Phone</strong>
-                <span>+966 567903464</span>
-                <span>+966 544594682</span>
+                <strong class="translate" data-key="phone">Phone</strong>
+                <span>+966 56790 3464</span>
+                <span>+966 57479 6209</span>
               </div>
             </div>
             <div class="contact-item">
@@ -1747,7 +1922,7 @@
                 <i class="fas fa-envelope"></i>
               </div>
               <div class="contact-text">
-                <strong>Email</strong>
+                <strong class="translate" data-key="email">Email</strong>
                 <span>salman@nujoudsalem.com</span>
               </div>
             </div>
@@ -1756,44 +1931,62 @@
                 <i class="fas fa-map-marker-alt"></i>
               </div>
               <div class="contact-text">
-                <strong>Address</strong>
-                <span>Dammam, Saudi Arabia</span>
+                <strong class="translate" data-key="address">Address</strong>
+                <span class="translate" data-key="dammam"
+                  >Dammam, Saudi Arabia</span
+                >
               </div>
             </div>
           </div>
+          
           <div class="social-links">
-            <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
-            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-            <a href="#" class="social-link"
+            <a href="https://wa.me/message/CUHGPMPZXVYVG1" class="social-link"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://wa.me/message/CUHGPMPZXVYVG1" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="https://wa.me/message/CUHGPMPZXVYVG1" class="social-link"
               ><i class="fab fa-linkedin-in"></i
             ></a>
-            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+            <a href="https://wa.me/message/CUHGPMPZXVYVG1" class="social-link"><i class="fab fa-twitter"></i></a>
+          </div>
+          <div class="qr-code">
+            <img href="https://wa.me/message/CUHGPMPZXVYVG1" src="./qr.png" alt="whatsapp-qrcode">
           </div>
         </div>
         <div class="contact-form">
-          <h3>Send Us a Message</h3>
-          <form>
+          <h3 class="translate" data-key="send_message">Send Us a Message</h3>
+          <form id="contactForm">
             <div class="form-group">
-              <label for="name">Your Name</label>
+              <label for="name" class="translate" data-key="your_name"
+                >Your Name</label
+              >
               <input type="text" id="name" class="form-control" required />
             </div>
             <div class="form-group">
-              <label for="email">Email Address</label>
+              <label for="email" class="translate" data-key="email_address"
+                >Email Address</label
+              >
               <input type="email" id="email" class="form-control" required />
             </div>
             <div class="form-group">
-              <label for="phone">Phone Number</label>
+              <label for="phone" class="translate" data-key="phone_number"
+                >Phone Number</label
+              >
               <input type="tel" id="phone" class="form-control" required />
             </div>
             <div class="form-group">
-              <label for="subject">Subject</label>
+              <label for="subject" class="translate" data-key="subject"
+                >Subject</label
+              >
               <input type="text" id="subject" class="form-control" required />
             </div>
             <div class="form-group">
-              <label for="message">Message</label>
+              <label for="message" class="translate" data-key="message"
+                >Message</label
+              >
               <textarea id="message" class="form-control" required></textarea>
             </div>
-            <button type="submit" class="btn">Send Message</button>
+            <button type="submit" class="btn translate" data-key="send_message">
+              Send Message
+            </button>
           </form>
         </div>
       </div>
@@ -1804,36 +1997,56 @@
       <div class="footer-container">
         <div class="footer-about">
           <div class="footer-logo">
-            <img src="https://via.placeholder.com/40x40?text=NS" alt="Logo" />
-            <span>Nujoud Salem Sayed Al Shammari General Contracting Est.</span>
-          </div>
-          <p class="footer-about">
-            We specialize in delivering
-            <span class="highlight-text"
-              >exceptional construction solutions</span
+            <img src="./logo.png" alt="Logo" />
+            <span class="translate" data-key="company_name_full"
+              >Nujoud Salem Sayed Al Shammari General Contracting Est.</span
             >
-            across Saudi Arabia with a focus on
-            <span class="highlight-text">quality</span>,
-            <span class="highlight-text">innovation</span>, and
-            <span class="highlight-text">client satisfaction</span>.
+          </div>
+          <p class="footer-about translate" data-key="footer_about">
+            We specialize in delivering exceptional construction solutions
+            across Saudi Arabia with a focus on quality, innovation, and client
+            satisfaction.
           </p>
         </div>
         <div class="footer-links">
-          <h3>Quick Links</h3>
+          <h3 class="translate" data-key="quick_links">Quick Links</h3>
           <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About Us</a></li>
-            <li><a href="#vision-mission">Vision & Mission</a></li>
-            <li><a href="#services">Our Services</a></li>
-            <li><a href="#gallery">Gallery</a></li>
-            <li><a href="#contact">Contact Us</a></li>
+            <li><a href="#home" class="translate" data-key="home">Home</a></li>
+            <li>
+              <a href="#about" class="translate" data-key="about">About Us</a>
+            </li>
+            <li>
+              <a
+                href="#vision-mission"
+                class="translate"
+                data-key="vision_mission"
+                >Vision & Mission</a
+              >
+            </li>
+            <li>
+              <a href="#services" class="translate" data-key="services"
+                >Our Services</a
+              >
+            </li>
+            <li>
+              <a href="#gallery" class="translate" data-key="gallery"
+                >Gallery</a
+              >
+            </li>
+            <li>
+              <a href="#contact" class="translate" data-key="contact"
+                >Contact Us</a
+              >
+            </li>
           </ul>
         </div>
         <div class="footer-contact">
-          <h3>Contact Info</h3>
+          <h3 class="translate" data-key="contact_info">Contact Info</h3>
           <div class="footer-contact-item">
             <i class="fas fa-map-marker-alt footer-contact-icon"></i>
-            <span>Dammam, Saudi Arabia</span>
+            <span class="translate" data-key="dammam"
+              >Dammam, Saudi Arabia</span
+            >
           </div>
           <div class="footer-contact-item">
             <i class="fas fa-phone footer-contact-icon"></i>
@@ -1846,12 +2059,21 @@
         </div>
       </div>
       <div class="copyright">
-        <p>
+        <p class="translate" data-key="copyright">
           &copy; 2023 Nujoud Salem Sayed Al Shammari General Contracting Est.
           C.R. 2050157753. All Rights Reserved.
         </p>
       </div>
     </footer>
+
+    <!-- EmailJS and Translation Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3.2.0/dist/email.min.js"></script>
+    <!-- <script>
+      // Initialize EmailJS with your User ID
+      (function () {
+        emailjs.init("stCFo4Wn0IKuUyjQz"); // Replace with your EmailJS user ID
+      })();
+    </script> -->
 
     <script>
       // Mobile Menu Toggle
@@ -2025,69 +2247,403 @@
       }
     </script>
     <script>
-      const content = [
-        {
-          title: "We Build the World You Imagine.",
-          tagline: "Turning visions into concrete reality.",
-        },
-        {
-          title: "Creating the World You Dream Of.",
-          tagline: "From blueprint to brilliance — we make it real.",
-        },
-        {
-          title: "Built for Your Dreams. Designed for the World.",
-          tagline: "Your imagination. Our foundation.",
-        },
-        {
-          title: "We Don’t Just Build. We Bring Dreams to Life.",
-          tagline: "Residential. Commercial. Remarkable.",
-        },
-        {
-          title: "Crafting Spaces That Shape Your World.",
-          tagline: "Quality, trust, and craftsmanship in every brick.",
-        },
-      ];
+     const content = [
+  {
+    en: {
+      title: "We Build the World You Imagine.",
+      tagline: "Turning visions into concrete reality."
+    },
+    ar: {
+      title: "نحن نبني العالم الذي تتخيله.",
+      tagline: "تحويل الرؤى إلى واقع ملموس."
+    }
+  },
+  {
+    en: {
+      title: "Creating the World You Dream Of.",
+      tagline: "From blueprint to brilliance — we make it real."
+    },
+    ar: {
+      title: "نصنع العالم الذي تحلم به.",
+      tagline: "من المخطط إلى الإبداع - نحن نحوله إلى واقع."
+    }
+  },
+  {
+    en: {
+      title: "Built for Your Dreams. Designed for the World.",
+      tagline: "Your imagination. Our foundation."
+    },
+    ar: {
+      title: "مبني لأحلامك. مصمم للعالم.",
+      tagline: "خيالك. أساسنا."
+    }
+  },
+  {
+    en: {
+      title: "We Don't Just Build. We Bring Dreams to Life.",
+      tagline: "Residential. Commercial. Remarkable."
+    },
+    ar: {
+      title: "نحن لا نبني فقط. نحقق الأحلام.",
+      tagline: "سكني. تجاري. استثنائي."
+    }
+  },
+  {
+    en: {
+      title: "Crafting Spaces That Shape Your World.",
+      tagline: "Quality, trust, and craftsmanship in every brick."
+    },
+    ar: {
+      title: "صياغة مساحات تشكل عالمك.",
+      tagline: "جودة، ثقة، وإتقان في كل لبنة."
+    }
+  }
+];
 
-      let index = 0;
+// Initial load
+let index = 0;
+// animateText(content[index]);
+
+// // Cycle every 4 seconds
+// setInterval(() => {
+//   index = (index + 1) % content.length;
+//   animateText(content[index]);
+// }, 4000);
+
+    //   let index = 0;
       const heroTitle = document.getElementById("heroTitle");
       const heroTagline = document.getElementById("heroTagline");
+let currentLanguage = 'en'; 
+  function animateText(contentObj) {
+  // Fade out
+  heroTitle.classList.remove("fade-in");
+  heroTagline.classList.remove("fade-in");
+  heroTitle.classList.add("fade-out");
+  heroTagline.classList.add("fade-out");
 
-      function animateText(title, tagline) {
-        // Fade out
-        heroTitle.classList.remove("fade-in");
-        heroTagline.classList.remove("fade-in");
-        heroTitle.classList.add("fade-out");
-        heroTagline.classList.add("fade-out");
+  setTimeout(() => {
+    // Update title with letter spans
+    heroTitle.innerHTML = "";
+    const titleText = contentObj[currentLanguage].title;
+    titleText.split("").forEach((char) => {
+      const span = document.createElement("span");
+      span.className = "letter-span";
+      span.textContent = char === " " ? "\u00A0" : char;
+      heroTitle.appendChild(span);
+    });
 
-        setTimeout(() => {
-          // Update title with letter spans
-          heroTitle.innerHTML = "";
-          title.split("").forEach((char) => {
-            const span = document.createElement("span");
-            span.className = "letter-span";
-            span.textContent = char === " " ? "\u00A0" : char;
-            heroTitle.appendChild(span);
-          });
+    // Update tagline text
+    heroTagline.textContent = contentObj[currentLanguage].tagline;
 
-          // Update tagline text
-          heroTagline.textContent = tagline;
-
-          // Fade in
-          heroTitle.classList.remove("fade-out");
-          heroTitle.classList.add("fade-in");
-          heroTagline.classList.remove("fade-out");
-          heroTagline.classList.add("fade-in");
-        }, 300);
-      }
+    // Fade in
+    heroTitle.classList.remove("fade-out");
+    heroTitle.classList.add("fade-in");
+    heroTagline.classList.remove("fade-out");
+    heroTagline.classList.add("fade-in");
+  }, 300);
+}
 
       // Initial load
-      animateText(content[index].title, content[index].tagline);
+    animateText(content[index]);
 
-      // Cycle every 4 seconds
-      setInterval(() => {
-        index = (index + 1) % content.length;
-        animateText(content[index].title, content[index].tagline);
-      }, 4000);
+// Cycle every 4 seconds
+setInterval(() => {
+  index = (index + 1) % content.length;
+  animateText(content[index]);
+}, 4000);
+    </script>
+
+    <script>
+      // Language Translation Functionality
+      const translations = {
+        en: {
+          company_name: "Nujoud General Contracting",
+          home: "Home",
+          about: "About Us",
+          vision_mission: "Vision & Mission",
+          services: "Our Services",
+          gallery: "Gallery",
+          contact: "Contact Us",
+          get_in_touch: "Get in Touch",
+          our_services: "Our Services",
+          completed_projects: "Completed Projects",
+          satisfied_clients: "Satisfied Clients",
+          years_experience: "Years of Experience",
+          table_of_contents: "TABLE OF CONTENTS",
+          about_us: "About Us",
+          about_description:
+            "Learn about our company, expertise, and what makes us different.",
+          vision_description:
+            "Discover our guiding principles and long-term objectives.",
+          services_description:
+            "Explore the comprehensive services we offer to our clients.",
+          contact_description:
+            "Get in touch with our team for your construction needs.",
+          read_more: "Read More",
+          about_text:
+            "We specialize in delivering exceptional construction solutions across Saudi Arabia. With a focus on quality, innovation, and client satisfaction, we bring expertise and dedication to every project we undertake.",
+          construction_excellence: "Construction Excellence",
+          construction_description:
+            "From residential to commercial projects, we ensure superior craftsmanship and attention to detail.",
+          client_approach: "Client-Centered Approach",
+          client_description:
+            "We prioritize understanding our clients' needs to deliver tailored solutions that exceed expectations.",
+          quality_commitment: "Commitment to Quality",
+          quality_description:
+            "With a team of experienced professionals, we uphold the highest standards of construction excellence.",
+          vision: "Vision",
+          vision_text:
+            "To be the leading provider of innovative and sustainable construction solutions in Saudi Arabia, recognized for our commitment to excellence, integrity, and client satisfaction.",
+          mission: "Mission",
+          mission_text:
+            "Our mission is to deliver high-quality construction projects tailored to meet the unique needs of our clients. Through expert craftsmanship, advanced technologies, and a dedicated team, we aim to exceed expectations, foster long-term relationships, and contribute positively to the growth and development of communities across Saudi Arabia.",
+          //   tiles_work: "Tiles Work",
+          //   tiles_description: "Professional installation of tiles for floors, walls, and specialized areas using high-quality materials and skilled craftsmanship.",
+          //   painting: "Painting",
+          //   painting_description: "Interior and exterior painting services that enhance aesthetics and protect surfaces, utilizing premium paints and finishes.",
+          //   plastering: "Plastering",
+          //   plastering_description: "Expert plastering solutions for smooth and durable wall surfaces, ensuring flawless finishes.",
+          landscape_services: "Landscape Services",
+          landscape_description:
+            "We provide complete landscaping solutions, including asphalt paving, interlock installation, retaining walls, and grading — turning your outdoor space into a functional and polished area.",
+          finishing_works: "Finishing Works",
+          finishing_description:
+            "We provide high-quality finishing services, including tiling, ceiling installation, painting, and trim — adding the final details that bring your space to life with a polished, complete look.",
+          maintenance_work: "Maintenance Work",
+          maintenance_description:
+            "Dependable maintenance and repair services keep your property functioning and safe. Our comprehensive solutions ensure your space remains in top condition year-round.",
+          design_work: "Design Work",
+          design_description:
+            "We provide expert MEP, architectural, and interior design work — creative solutions tailored to your vision and requirements for a perfectly designed space.",
+
+          plumbing: "Plumbing",
+          plumbing_description:
+            "Complete plumbing services encompassing installation, repair, and maintenance of water supply, drainage, and fixtures.",
+          hvac: "HVAC",
+          hvac_description:
+            "Design, installation, and servicing of HVAC systems to optimize indoor air quality and comfort.",
+          fire_fighting: "Fire Fighting",
+          fire_description:
+            "Implementation of fire safety systems including detection, suppression, and emergency response planning to safeguard properties and occupants.",
+          civil_work: "Civil Work",
+          civil_description:
+            "Comprehensive civil engineering services covering excavation, foundation laying, structural construction, and infrastructure development.",
+          carpentry: "Carpentry",
+          carpentry_description:
+            "Custom carpentry services for furniture, fixtures, and interior woodwork, tailored to meet aesthetic and functional requirements.",
+          interior_design: "Interior Design",
+          interior_description:
+            "Creative interior design solutions that transform spaces with innovative layouts, materials, and decorative elements.",
+          residential_project: "Residential Project",
+          commercial_building: "Commercial Building",
+          kitchen_renovation: "Kitchen Renovation",
+          bathroom_design: "Bathroom Design",
+          living_space: "Living Space",
+          send_message: "Send Us a Message",
+          your_name: "Your Name",
+          email_address: "Email Address",
+          phone_number: "Phone Number",
+          subject: "Subject",
+          message: "Message",
+          phone: "Phone",
+          email: "Email",
+          address: "Address",
+          dammam: "Dammam, Saudi Arabia",
+          company_name_full:
+            "Nujoud Salem Sayed Al Shammari General Contracting Est.",
+          footer_about:
+            "We specialize in delivering exceptional construction solutions across Saudi Arabia with a focus on quality, innovation, and client satisfaction.",
+          quick_links: "Quick Links",
+          contact_info: "Contact Info",
+          copyright:
+            "© 2023 Nujoud Salem Sayed Al Shammari General Contracting Est. C.R. 2050157753. All Rights Reserved.",
+        },
+        ar: {
+          company_name: "نجود للمقاولات العامة",
+          home: "الرئيسية",
+          about: "من نحن",
+          vision_mission: "الرؤية والرسالة",
+          services: "خدماتنا",
+          gallery: "معرض الصور",
+          contact: "اتصل بنا",
+          get_in_touch: "تواصل معنا",
+          our_services: "خدماتنا",
+          completed_projects: "المشاريع المكتملة",
+          satisfied_clients: "عملاء راضون",
+          years_experience: "سنوات من الخبرة",
+          table_of_contents: "جدول المحتويات",
+          about_us: "من نحن",
+          about_description: "تعرف على شركتنا وخبراتنا وما يميزنا.",
+          vision_description: "اكتشف مبادئنا التوجيهية وأهدافنا طويلة المدى.",
+          services_description: "استكشف الخدمات الشاملة التي نقدمها لعملائنا.",
+          contact_description: "تواصل مع فريقنا لاحتياجاتك الإنشائية.",
+          read_more: "اقرأ المزيد",
+          about_text:
+            "نتخصص في تقديم حلول إنشائية استثنائية في جميع أنحاء المملكة العربية السعودية. مع التركيز على الجودة والابتكار ورضا العملاء، نقدم الخبرة والتفاني في كل مشروع نقوم به.",
+          construction_excellence: "التميز في البناء",
+          construction_description:
+            "من المشاريع السكنية إلى التجارية، نضمن الحرفية الفائقة والاهتمام بالتفاصيل.",
+          client_approach: "نهج يركز على العميل",
+          client_description:
+            "نولي الأولوية لفهم احتياجات عملائنا لتقديم حلول مخصصة تتجاوز التوقعات.",
+          quality_commitment: "الالتزام بالجودة",
+          quality_description:
+            "مع فريق من المحترفين ذوي الخبرة، نحافظ على أعلى معايير التميز الإنشائي.",
+          vision: "الرؤية",
+          vision_text:
+            "أن نكون المزود الرائد للحلول الإنشائية المبتكرة والمستدامة في المملكة العربية السعودية، معترف بنا لالتزامنا بالتميز والنزاهة ورضا العملاء.",
+          mission: "الرسالة",
+          mission_text:
+            "مهمتنا هي تقديم مشاريع إنشائية عالية الجودة مصممة لتلبية الاحتياجات الفريدة لعملائنا. من خلال الحرفية الخبيرة والتقنيات المتقدمة وفريق مخصص، نهدف إلى تجاوز التوقعات وتعزيز العلاقات طويلة الأجل والمساهمة إيجابياً في نمو وتنمية المجتمعات في جميع أنحاء المملكة العربية السعودية.",
+          //   tiles_work: "أعمال البلاط",
+          //   tiles_description: "تركيب احترافي للبلاط للأرضيات والجدران والمناطق المتخصصة باستخدام مواد عالية الجودة وحرفية ماهرة.",
+          //   painting: "الطلاء",
+          //   painting_description: "خدمات طلاء داخلية وخارجية تعزز الجماليات وتحمي الأسطح باستخدام دهانات ومنتجات نهائية ممتازة.",
+          //   plastering: "التبييض",
+          //   plastering_description: "حلول تبييض خبيرة لأسطح جدران ناعمة ومتينة، تضمن تشطيبات لا تشوبها شائبة.",
+          // ... existing translations ...
+          landscape_services: "خدمات تنسيق المواقع",
+          landscape_description:
+            "نقدم حلولاً كاملة لتنسيق المواقع، بما في ذلك رصف الأسفلت، تركيب البلاط، الجدران الاستنادية، والتسوية — تحويل مساحاتك الخارجية إلى منطقة وظيفية ومتألقة.",
+          finishing_works: "أعمال التشطيب",
+          finishing_description:
+            "نقدم خدمات تشطيب عالية الجودة تشمل تركيب البلاط، تركيب الأسقف، الدهان، والتشطيبات النهائية — إضافة اللمسات الأخيرة التي تجعل مساحتك تنبض بالحياة بمظهر متكامل ومتألق.",
+          maintenance_work: "أعمال الصيانة",
+          maintenance_description:
+            "خدمات صيانة وإصلاح موثوقة تحافظ على ممتلكاتك تعمل بشكل آمن. حلولنا الشاملة تضمن بقاء مساحتك في أفضل حالة على مدار العام.",
+          design_work: "أعمال التصميم",
+          design_description:
+            "نقدم أعمال تصميم متخصصة في الميكانيكا والكهرباء والسباكة، التصميم المعماري، والداخلي — حلول إبداعية مصممة خصيصًا لرؤيتك ومتطلباتك لمساحة مصممة بشكل مثالي.",
+          plumbing: "السباكة",
+          plumbing_description:
+            "خدمات سباكة كاملة تشمل التثبيت والإصلاح والصيانة لإمدادات المياه والصرف والتركيبات.",
+          hvac: "التدفئة والتهوية وتكييف الهواء",
+          hvac_description:
+            "تصميم وتركيب وخدمة أنظمة التدفئة والتهوية وتكييف الهواء لتحسين جودة الهواء الداخلي والراحة.",
+          fire_fighting: "مكافحة الحرائق",
+          fire_description:
+            "تنفيذ أنظمة السلامة من الحرائق بما في ذلك الكشف والقمع والتخطيط للاستجابة للطوارئ لحماية الممتلكات والقاطنين.",
+          civil_work: "الأعمال المدنية",
+          civil_description:
+            "خدمات هندسة مدنية شاملة تشمل الحفر ووضع الأساسات والبناء الهيكلي وتطوير البنية التحتية.",
+          carpentry: "النجارة",
+          carpentry_description:
+            "خدمات نجارة مخصصة للأثاث والتركيبات والأعمال الخشبية الداخلية، مصممة لتلبية المتطلبات الجمالية والوظيفية.",
+          interior_design: "التصميم الداخلي",
+          interior_description:
+            "حلول تصميم داخلي إبداعية تحول المساحات بتخطيطات مبتكرة ومواد وعناصر زخرفية.",
+          residential_project: "مشروع سكني",
+          commercial_building: "مبنى تجاري",
+          kitchen_renovation: "تجديد المطبخ",
+          bathroom_design: "تصميم الحمام",
+          living_space: "مساحة المعيشة",
+          send_message: "أرسل لنا رسالة",
+          your_name: "اسمك",
+          email_address: "عنوان البريد الإلكتروني",
+          phone_number: "رقم الهاتف",
+          subject: "الموضوع",
+          message: "الرسالة",
+          phone: "الهاتف",
+          email: "البريد الإلكتروني",
+          address: "العنوان",
+          dammam: "الدمام، المملكة العربية السعودية",
+          company_name_full: "مؤسسة نجود سالم سعيد الشمري للمقاولات العامة",
+          footer_about:
+            "نتخصص في تقديم حلول إنشائية استثنائية في جميع أنحاء المملكة العربية السعودية مع التركيز على الجودة والابتكار ورضا العملاء.",
+          quick_links: "روابط سريعة",
+          contact_info: "معلومات الاتصال",
+          copyright:
+            "© 2023 مؤسسة نجود سالم سعيد الشمري للمقاولات العامة. س.ت. 2050157753. جميع الحقوق محفوظة.",
+        },
+      };
+
+      // Language switcher functionality
+      const enBtn = document.getElementById("enBtn");
+      const arBtn = document.getElementById("arBtn");
+
+  function switchLanguage(lang) {
+  currentLanguage = lang; // Update current language
+  
+  // Update button states
+  if (lang === 'en') {
+    enBtn.classList.add('active');
+    arBtn.classList.remove('active');
+    document.body.classList.remove('rtl');
+  } else {
+    arBtn.classList.add('active');
+    enBtn.classList.remove('active');
+    document.body.classList.add('rtl');
+  }
+  
+  // Update all translatable elements
+  document.querySelectorAll('.translate').forEach(element => {
+    const key = element.getAttribute('data-key');
+    if (translations[lang][key]) {
+      element.textContent = translations[lang][key];
+    }
+  });
+
+  // Update hero text immediately for current index
+  animateText(content[index]);
+}
+
+      enBtn.addEventListener("click", () => switchLanguage("en"));
+      arBtn.addEventListener("click", () => switchLanguage("ar"));
+
+      // Initialize with English
+      switchLanguage("en");
+    </script>
+
+    <script>
+
+         (function () {
+        emailjs.init("stCFo4Wn0IKuUyjQz"); // Replace with your EmailJS user ID
+      })();
+      // EmailJS Form Submission
+      document
+        .getElementById("contactForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          // Get form data
+          const formData = {
+            name: document.getElementById("name").value,
+            email: document.getElementById("email").value,
+            phone: document.getElementById("phone").value,
+            subject: document.getElementById("subject").value,
+            message: document.getElementById("message").value,
+          };
+
+          // Send email using EmailJS
+          emailjs
+            .send(
+              "service_nh14c65",
+              "template_huqz6so",
+              formData
+            )
+            .then(
+              function (response) {
+                console.log("SUCCESS!", response.status, response.text);
+
+                // Show success message
+                const successMessage =
+                  document.getElementById("successMessage");
+                successMessage.style.display = "block";
+
+                // Hide after 5 seconds
+                setTimeout(() => {
+                  successMessage.style.display = "none";
+                }, 5000);
+
+                // Reset form
+                document.getElementById("contactForm").reset();
+              },
+              function (error) {
+                console.log("FAILED...", error);
+                alert("Failed to send message. Please try again later.");
+              }
+            );
+        });
     </script>
   </body>
 </html>
