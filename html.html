@@ -1995,42 +1995,76 @@
           </div>
         </div>
         <div class="contact-form">
+           
+
           <h3 class="translate" data-key="send_message">Send Us a Message</h3>
-          <form id="contactForm">
-            <div class="form-group">
-              <label for="name" class="translate" data-key="your_name"
-                >Your Name</label
-              >
-              <input type="text" id="name" class="form-control" required />
-            </div>
-            <div class="form-group">
-              <label for="email" class="translate" data-key="email_address"
-                >Email Address</label
-              >
-              <input type="email" id="email" class="form-control" required />
-            </div>
-            <div class="form-group">
-              <label for="phone" class="translate" data-key="phone_number"
-                >Phone Number</label
-              >
-              <input type="tel" id="phone" class="form-control" required />
-            </div>
-            <div class="form-group">
-              <label for="subject" class="translate" data-key="subject"
-                >Subject</label
-              >
-              <input type="text" id="subject" class="form-control" required />
-            </div>
-            <div class="form-group">
-              <label for="message" class="translate" data-key="message"
-                >Message</label
-              >
-              <textarea id="message" class="form-control" required></textarea>
-            </div>
-            <button type="submit" class="btn translate" data-key="send_message">
-              Send Message
-            </button>
-          </form>
+     <!-- EmailJS CDN -->
+<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script>
+  (function () {
+    emailjs.init("vVyEa1ls4aehnS_Xs"); // your PUBLIC_KEY
+  })();
+</script>
+
+<!-- Contact Form Section -->
+<div id="formSection">
+  <form id="contactForm">
+    <div class="form-group">
+      <label for="name" class="translate" data-key="your_name">Your Name</label>
+      <input type="text" id="name" class="form-control" required />
+    </div>
+    <div class="form-group">
+      <label for="email" class="translate" data-key="email_address">Email Address</label>
+      <input type="email" id="email" class="form-control" required />
+    </div>
+    <div class="form-group">
+      <label for="phone" class="translate" data-key="phone_number">Phone Number</label>
+      <input type="tel" id="phone" class="form-control" required />
+    </div>
+    <div class="form-group">
+      <label for="subject" class="translate" data-key="subject">Subject</label>
+      <input type="text" id="subject" class="form-control" required />
+    </div>
+    <div class="form-group">
+      <label for="message" class="translate" data-key="message">Message</label>
+      <textarea id="message" class="form-control" required></textarea>
+    </div>
+    <button type="button" class="btn translate" data-key="send_message" onclick="sendEmail()">
+      Send Message
+    </button>
+  </form>
+</div>
+
+<!-- Thank You Message Section (Hidden by default) -->
+<div id="thankYouSection" style="display: none; text-align: center; padding: 40px;">
+  <h2>✅ Thank you for contacting us!</h2>
+  <p>We’ve received your message and will get back to you shortly.</p>
+</div>
+
+<!-- Script to handle Email sending and section switch -->
+<script>
+  function sendEmail() {
+    const params = {
+      name: document.getElementById("name").value,
+      email: document.getElementById("email").value,
+      phone: document.getElementById("phone").value,
+      subject: document.getElementById("subject").value,
+      message: document.getElementById("message").value,
+    };
+
+    emailjs.send("service_niluuxt", "template_v201iiq", params)
+      .then(function (response) {
+        // Hide form section
+        document.getElementById("formSection").style.display = "none";
+        // Show thank you section
+        document.getElementById("thankYouSection").style.display = "block";
+      })
+      .catch(function (error) {
+        alert("❌ Failed to send message: " + JSON.stringify(error));
+      });
+  }
+</script>
+
         </div>
       </div>
     </section>
@@ -2117,7 +2151,40 @@
         emailjs.init("stCFo4Wn0IKuUyjQz"); // Replace with your EmailJS user ID
       })();
     </script> -->
+ <!-- <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script>
+  
+        (function () {
+    emailjs.init("vVyEa1ls4aehnS_Xs"); // Replace with your PUBLIC_KEY (USER_ID)
+  })();
+  document.getElementById("contactForm").addEventListener("submit", function (e) {
 
+    
+    e.preventDefault();
+    console.log('====================================');
+    console.log("dsd");
+    console.log('====================================');
+    const params = {
+      name: document.getElementById("name").value,
+      email: document.getElementById("email").value,
+      phone: document.getElementById("phone").value,
+      subject: document.getElementById("subject").value,
+      message: document.getElementById("message").value,
+    };
+
+    emailjs
+      .send("service_niluuxt", "template_v201iiq", params)
+      .then(
+        function (response) {
+          alert("✅ Message sent successfully!");
+          document.getElementById("contactForm").reset();
+        },
+        function (error) {
+          alert("❌ Failed to send message: " + JSON.stringify(error));
+        }
+      );
+  });
+</script> -->
     <script>
       // Mobile Menu Toggle
       const mobileMenuBtn = document.getElementById("mobileMenuBtn");
@@ -2636,7 +2703,7 @@ setInterval(() => {
       // Initialize with English
       switchLanguage("en");
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3.2.0/dist/email.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3.2.0/dist/email.min.js"></script>
     <script>
 
          (function () {
@@ -2647,7 +2714,7 @@ setInterval(() => {
         .getElementById("contactForm")
         .addEventListener("submit", function (event) {
           event.preventDefault();
-
+ console.log(formData,"asdkfj")
           // Get form data
           const formData = {
             name: document.getElementById("name").value,
@@ -2657,6 +2724,8 @@ setInterval(() => {
             message: document.getElementById("message").value,
           };
 
+
+         
           // Send email using EmailJS
           emailjs
             .send(
@@ -2688,6 +2757,6 @@ setInterval(() => {
               }
             );
         });
-    </script>
+    </script> -->
   </body>
 </html>
